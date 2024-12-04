@@ -5,10 +5,11 @@ class BazarPuntoApp extends KApplicationClass {
     orderViewer;
     totalBsS;
     totalDolares;
+    navigationManager = KNavigationManager();
 
 
     get loginScreen() {
-        let screen = KScreen(navigationManager);
+        let screen = KScreen(this.navigationManager);
         let email, cedula;
         screen.title.setValue("Bazar 2024 Punto App");
         screen.add(
@@ -45,7 +46,7 @@ class BazarPuntoApp extends KApplicationClass {
 
 
     get payScreen() {
-        let screen = KScreen(navigationManager);
+        let screen = KScreen(this.navigationManager);
         let monto, ordenId;
         screen.title.setValue("Bazar 2024 Cobro App");
 
@@ -154,7 +155,7 @@ class BazarPuntoApp extends KApplicationClass {
                         .add(
                             KButton("Ver órdenes")
                                 .addCssText("width: 100px; height: 48px; margin: 8px;")
-                                .addEvent("click", (() => { navigationManager.navigateTo(this.ordersScreen) })),
+                                .addEvent("click", (() => { this.navigationManager.navigateTo(this.ordersScreen) })),
 
 
                         ),
@@ -179,7 +180,7 @@ class BazarPuntoApp extends KApplicationClass {
 
 
     get ordersScreen() {
-        let screen = KScreen(navigationManager);
+        let screen = KScreen(this.navigationManager);
         screen.title.setValue("Bazar 2024 Punto App");
 
         let upddateOrders = () => {
@@ -263,13 +264,12 @@ class BazarPuntoApp extends KApplicationClass {
     }
 
 
-    constructor(navigationManager) {
+    constructor() {
         super("bazarPunto", "Bazar punto", ["system"]);
-        this.navigationManager = navigationManager;
         this.rootView = this.navigationManager.push(this.loginScreen);
     }
 }
 
 
-var bazarPuntoApp = new BazarPuntoApp(navigationManager);
+var bazarPuntoApp = new BazarPuntoApp();
 bazarPuntoApp.register();

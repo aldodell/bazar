@@ -3,6 +3,7 @@ class BazarControlApp extends KApplicationClass {
     usersDataList = KDataList();
     orders;
     filter;
+    navigationManager = KNavigationManager();
 
     get controlScreen() {
         let screen = KScreen(this.navigationManager);
@@ -132,9 +133,8 @@ class BazarControlApp extends KApplicationClass {
 
 
 
-    constructor(navigationManager) {
+    constructor() {
         super("bazarControl", "Bazar Control", ["system-adm"]);
-        this.navigationManager = navigationManager;
         this.rootView = this.navigationManager.push(this.controlScreen);
         let payload = {
             "cedula": "*"
@@ -151,5 +151,5 @@ class BazarControlApp extends KApplicationClass {
 }
 
 
-var bazarControl = new BazarControlApp(navigationManager);
+var bazarControl = new BazarControlApp();
 bazarControl.register();
